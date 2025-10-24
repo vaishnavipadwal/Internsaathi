@@ -1,5 +1,13 @@
-import mongoose from "mongoose";    
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config(); // <-- ye line zaroor add karni hai
+
 export const connectDB = async () => {
-    await mongoose.connect('mongodb+srv://sunsystechsol_db_user:Internsaathi123@cluster0.wa76e5d.mongodb.net/Internsaathi')
-    .then(() => console.log("MongoDB connected successfully"))
-}
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ MongoDB connected successfully");
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error);
+  }
+};
